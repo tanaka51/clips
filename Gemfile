@@ -18,6 +18,7 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'haml-rails'
 end
 
 gem 'jquery-rails'
@@ -38,6 +39,7 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 group :development, :test do
+  gem 'pry-rails'
   gem 'rspec-rails'
   gem 'cucumber-rails', require: false
   gem 'guard'
