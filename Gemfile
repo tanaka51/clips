@@ -14,11 +14,14 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 
+  gem 'twitter-bootstrap-rails'
+
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
   gem 'haml-rails'
+  gem 'less-rails' # for twitter-bootstrap-rails
 end
 
 gem 'jquery-rails'
@@ -40,19 +43,22 @@ gem 'jquery-rails'
 
 gem 'execjs'
 gem 'therubyracer'
+gem 'simple_form'
 
 # for capybara
 gem 'nokogiri'
-gem 'xpath'
 
 group :development, :test do
   gem 'pry-rails'
+
   gem 'rspec-rails', '>= 2.12'
-  gem 'guard'
-  gem 'guard-spork'
-  gem 'guard-rspec'
+  gem "shoulda-matchers"
   gem 'factory_girl_rails'
   gem 'capybara', '>= 2.0'
   gem 'database_cleaner'
+
+  gem 'guard'
+  gem 'guard-spork'
+  gem 'guard-rspec'
   gem 'rb-inotify'
 end
