@@ -41,15 +41,18 @@ gem 'jquery-rails'
 gem 'execjs'
 gem 'therubyracer'
 
+# for capybara
+gem 'nokogiri'
+gem 'xpath'
+
 group :development, :test do
   gem 'pry-rails'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 2.12'
   gem 'guard'
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'factory_girl_rails'
-  gem 'capybara'
-  gem 'capybara-webkit'
+  gem 'capybara', '>= 2.0'
   gem 'database_cleaner'
   gem 'rb-inotify'
 end
