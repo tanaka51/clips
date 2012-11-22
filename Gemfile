@@ -44,11 +44,9 @@ gem 'therubyracer'
 group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'cucumber-rails', require: false
   gem 'guard'
   gem 'guard-spork'
   gem 'guard-rspec'
-  gem 'guard-cucumber'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'capybara-webkit'
