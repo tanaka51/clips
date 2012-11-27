@@ -38,7 +38,7 @@ describe ClipsController do
 
       it "redirects to 'show'" do
         post 'create'
-        expect(response).to redirect_to clip_path(clip)
+        expect(response).to redirect_to clip_path(id: clip.access_id)
       end
 
       it "sets a flash[:notice]" do
@@ -61,11 +61,19 @@ describe ClipsController do
   end
 
   describe "GET 'show'" do
-    it "assigns a given id's clip to @clip" do
-      clip = FactoryGirl.create :clip, id: 1
-      Clip.should_receive(:find).with('1').and_return(clip)
+    # let の遅延評価だと FactoryGirl.create 時に stub されてしまうため、正格評価とする
+    let!(:clip) { FactoryGirl.create :clip }
 
-      get 'show', id: 1
+    it "finds clip with access_id" do
+      Clip.should_receive(:where).with(access_id: clip.access_id).and_return([clip])
+
+      get 'show', id: clip.access_id
+    end
+
+    it "assigns a given id's clip to @clip" do
+      Clip.stub(:where).and_return([clip])
+
+      get 'show', id: clip.access_id
 
       expect(assigns(:clip)).to eq(clip)
     end

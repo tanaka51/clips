@@ -7,13 +7,13 @@ class ClipsController < ApplicationController
     @clip = Clip.new(params['clip'])
 
     if @clip.save
-      redirect_to clip_path(@clip), notice: 'clip was successfuly created'
+      redirect_to clip_path(id: @clip.access_id), notice: 'clip was successfuly created'
     else
       render :new
     end
   end
 
   def show
-    @clip = Clip.find(params['id'])
+    @clip = Clip.where(access_id: params['id']).first
   end
 end
