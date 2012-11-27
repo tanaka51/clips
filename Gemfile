@@ -44,6 +44,7 @@ gem 'jquery-rails'
 gem 'execjs'
 gem 'therubyracer'
 gem 'simple_form'
+gem 'coderay'
 
 # for capybara
 gem 'nokogiri'

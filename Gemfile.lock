@@ -200,6 +200,7 @@ PLATFORMS
 
 DEPENDENCIES
   capybara (>= 2.0)
+  coderay
   coffee-rails (~> 3.2.1)
   database_cleaner
   execjs
