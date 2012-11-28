@@ -79,4 +79,15 @@ describe ClipsController do
     end
   end
 
+  describe "GET 'index" do
+
+    it "assigns a clips to @clips" do
+      FactoryGirl.create_list :clip, 3, code: 'test'
+      clips = Clip.all
+
+      get 'index'
+
+      expect(assigns(:clips)).to eq(clips)
+    end
+  end
 end

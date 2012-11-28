@@ -16,4 +16,8 @@ class ClipsController < ApplicationController
   def show
     @clip = Clip.where(access_id: params['id']).first
   end
+
+  def index
+    @clips = Clip.all
+  end
 end
