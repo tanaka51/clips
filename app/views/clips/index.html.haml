@@ -1,6 +1,9 @@
 %h1 All Clips
 
-%ul
+%dl
   - @clips.each do |clip|
-    %li
-      = link_to clip.access_id, clip_path(id: clip.access_id)
+    %dt
+      = link_to "Clip: #{clip.access_id}", clip_path(id: clip.access_id)
+    %dd
+      - code = clip.code.split("\n").take(5).join("\n")
+      != CodeRay.scan(code, :ruby).div
