@@ -64,17 +64,16 @@ describe ClipsController do
     # let の遅延評価だと FactoryGirl.create 時に stub されてしまうため、正格評価とする
     let!(:clip) { FactoryGirl.create :clip }
 
-    it "finds clip with access_id" do
-      Clip.should_receive(:where).with(access_id: clip.access_id).and_return([clip])
-
+    before do
+      Clip.stub(:where).and_return([clip])
       get 'show', id: clip.access_id
     end
 
+    it "finds clip with access_id" do
+      expect(Clip).to have_received(:where).with(access_id: clip.access_id)
+    end
+
     it "assigns a given id's clip to @clip" do
-      Clip.stub(:where).and_return([clip])
-
-      get 'show', id: clip.access_id
-
       expect(assigns(:clip)).to eq(clip)
     end
   end
