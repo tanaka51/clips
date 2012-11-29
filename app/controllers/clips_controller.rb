@@ -20,4 +20,18 @@ class ClipsController < ApplicationController
   def index
     @clips = Clip.all
   end
+
+  def edit
+    @clip = Clip.where(access_id: params['id']).first
+  end
+
+  def update
+    @clip = Clip.where(access_id: params['id']).first
+
+    if @clip.update_attributes(params['clip'])
+      redirect_to clip_path(id: @clip.access_id), notice: 'clip was successfuly updated'
+    else
+      render :edit
+    end
+  end
 end

@@ -90,4 +90,60 @@ describe ClipsController do
       expect(assigns(:clips)).to eq(clips)
     end
   end
+
+  describe "GET 'edit'" do
+    it "assigns a given access_id's clip to @clip" do
+      clip = FactoryGirl.create :clip, code: 'test'
+
+      get 'edit', id: clip.access_id
+
+      expect(assigns(:clip)).to eq clip
+    end
+  end
+
+  describe "PUT 'update'" do
+    let!(:clip) { FactoryGirl.create :clip, code: 'test' }
+    let!(:code) { 'updated code' }
+    let(:params) do {
+        'id'   => clip.access_id,
+        'clip' => { code: code }
+      }
+    end
+    let(:successed) { true }
+
+    before do
+      Clip.stub(:where).and_return([clip])
+      clip.stub(:update_attributes).and_return(successed)
+
+      put 'update', params
+    end
+
+    it "assigns a given access_id's clip to @clip" do
+      expect(assigns(:clip)).to eq clip
+    end
+
+    it "updates a clip" do
+      expect(clip).to have_received(:update_attributes).with('code' => code)
+    end
+
+    context "when successes to update" do
+      let(:successed) { true }
+
+      it "redirects to 'show'" do
+        expect(response).to redirect_to clip_path(id: clip.access_id)
+      end
+
+      it "sets a flash[:notice]" do
+        expect(flash[:notice]).to_not be_nil
+      end
+    end
+
+    context "when failes to udpate" do
+      let(:successed) { false }
+
+      it "render template 'edit'" do
+        expect(page).to render_template('edit')
+      end
+    end
+  end
 end
