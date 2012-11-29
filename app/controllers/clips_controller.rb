@@ -1,4 +1,6 @@
 class ClipsController < ApplicationController
+  before_filter :prepare_clip, %w[show edit update]
+
   def new
     @clip = Clip.new
   end
@@ -14,7 +16,6 @@ class ClipsController < ApplicationController
   end
 
   def show
-    @clip = Clip.where(access_id: params['id']).first
   end
 
   def index
@@ -22,16 +23,18 @@ class ClipsController < ApplicationController
   end
 
   def edit
-    @clip = Clip.where(access_id: params['id']).first
   end
 
   def update
-    @clip = Clip.where(access_id: params['id']).first
-
     if @clip.update_attributes(params['clip'])
       redirect_to clip_path(id: @clip.access_id), notice: 'clip was successfuly updated'
     else
       render :edit
     end
+  end
+
+  private
+  def prepare_clip
+    @clip = Clip.where(access_id: params['id']).first
   end
 end
