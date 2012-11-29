@@ -54,6 +54,7 @@ group :development, :test do
 
   gem 'rspec-rails', '>= 2.12'
   gem "shoulda-matchers"
+  gem 'rspec-spies'
   gem 'factory_girl_rails'
   gem 'capybara', '>= 2.0'
   gem 'database_cleaner'
