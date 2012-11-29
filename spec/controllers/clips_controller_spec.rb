@@ -79,7 +79,7 @@ describe ClipsController do
     end
   end
 
-  describe "GET 'index" do
+  describe "GET 'index'" do
 
     it "assigns a clips to @clips" do
       FactoryGirl.create_list :clip, 3, code: 'test'
