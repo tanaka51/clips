@@ -3,7 +3,7 @@
 %dl
   - @clips.each do |clip|
     %dt
-      = link_to "Clip: #{clip.access_id}", clip_path(id: clip.access_id)
+      = link_to "Clip: #{clip.id}", clip_path(clip)
     %dd
       - code = clip.code.split("\n").take(5).join("\n")
       != CodeRay.scan(code, :ruby).div

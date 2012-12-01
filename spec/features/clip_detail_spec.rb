@@ -11,17 +11,17 @@ test4
   given!(:clip) { FactoryGirl.create :clip, code: code }
 
   scenario 'User sees highliting code' do
-    visit clip_path(id: clip.access_id)
+    visit clip_path(clip)
 
     expect(page).to have_css('.CodeRay')
     expect(page).to have_text(code)
   end
 
   scenario 'User links to edit to click edit link' do
-    visit clip_path(id: clip.access_id)
+    visit clip_path(clip)
 
     click_on 'Edit'
 
-    expect(current_path).to eq(edit_clip_path(id: clip.access_id))
+    expect(current_path).to eq(edit_clip_path(clip))
   end
 end
