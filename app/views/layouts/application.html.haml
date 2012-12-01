@@ -24,8 +24,12 @@
           %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
           = link_to 'Clips', root_path, class: 'brand'
           %ul.nav.pull-right
-            %li= link_to 'New Clip', new_clip_path
-            %li= link_to 'All Clips', clips_path
+            - if current_user
+              %li= link_to 'New Clip', new_clip_path
+              %li= link_to 'All Clips', clips_path
+              %li= link_to 'sign out', signout_path
+            - else
+              %li= link_to 'sign in with github', 'auth/github'
 
     .container
 
