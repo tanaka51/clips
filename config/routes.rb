@@ -1,6 +1,4 @@
 Clips::Application.routes.draw do
-  get "welcom/index"
-
   root to: 'clips#new'
 
   resources :clips
@@ -8,4 +6,6 @@ Clips::Application.routes.draw do
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destory', as: 'signout'
+
+  match "welcome", to: 'welcom#index', as: 'welcome'
 end
