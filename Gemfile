@@ -45,6 +45,7 @@ gem 'execjs'
 gem 'therubyracer'
 gem 'simple_form'
 gem 'coderay'
+gem 'acts_as_random_id'
 
 # for capybara
 gem 'nokogiri'
