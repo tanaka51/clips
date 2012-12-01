@@ -1,5 +1,3 @@
-require 'securerandom'
-
 class Clip < ActiveRecord::Base
   attr_accessible :code
 
