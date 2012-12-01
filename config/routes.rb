@@ -1,4 +1,6 @@
 Clips::Application.routes.draw do
+  get "welcom/index"
+
   root to: 'clips#new'
 
   resources :clips
