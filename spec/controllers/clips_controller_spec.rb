@@ -38,7 +38,7 @@ describe ClipsController do
 
       it "redirects to 'show'" do
         post 'create'
-        expect(response).to redirect_to clip_path(id: clip.access_id)
+        expect(response).to redirect_to clip_path(clip)
       end
 
       it "sets a flash[:notice]" do
@@ -65,12 +65,12 @@ describe ClipsController do
     let!(:clip) { FactoryGirl.create :clip }
 
     before do
-      Clip.stub(:where).and_return([clip])
-      get 'show', id: clip.access_id
+      Clip.stub(:find).and_return(clip)
+      get 'show', id: clip.id
     end
 
-    it "finds clip with access_id" do
-      expect(Clip).to have_received(:where).with(access_id: clip.access_id)
+    it "finds clip with id" do
+      expect(Clip).to have_received(:find).with(clip.id.to_s)
     end
 
     it "assigns a given id's clip to @clip" do
@@ -91,10 +91,10 @@ describe ClipsController do
   end
 
   describe "GET 'edit'" do
-    it "assigns a given access_id's clip to @clip" do
+    it "assigns a clip to @clip" do
       clip = FactoryGirl.create :clip, code: 'test'
 
-      get 'edit', id: clip.access_id
+      get 'edit', id: clip.id
 
       expect(assigns(:clip)).to eq clip
     end
@@ -104,20 +104,20 @@ describe ClipsController do
     let!(:clip) { FactoryGirl.create :clip, code: 'test' }
     let!(:code) { 'updated code' }
     let(:params) do {
-        'id'   => clip.access_id,
+        'id'   => clip.id,
         'clip' => { code: code }
       }
     end
     let(:successed) { true }
 
     before do
-      Clip.stub(:where).and_return([clip])
+      Clip.stub(:find).and_return(clip)
       clip.stub(:update_attributes).and_return(successed)
 
       put 'update', params
     end
 
-    it "assigns a given access_id's clip to @clip" do
+    it "assigns a clip to @clip" do
       expect(assigns(:clip)).to eq clip
     end
 
@@ -129,7 +129,7 @@ describe ClipsController do
       let(:successed) { true }
 
       it "redirects to 'show'" do
-        expect(response).to redirect_to clip_path(id: clip.access_id)
+        expect(response).to redirect_to clip_path(clip)
       end
 
       it "sets a flash[:notice]" do

@@ -7,13 +7,12 @@ describe Clip do
   end
 
   describe "before_create" do
-    it "sets access_id using SecureRandom.hex" do
-       # SecureRandom#hex returns string that length is twice of given number length
-      SecureRandom.should_receive(:hex)
-        .with(Clip::ACCESS_ID_LENGTH/2)
-        .and_return('random_token')
-      clip = described_class.create!(code: 'test')
-      expect(clip.access_id).to_not be_nil
+    it "sets a random value to id (not sequential)" do
+      clips = FactoryGirl.create_list :clip, 2
+
+      # TODO: think better way
+      expect(clips[0].id).to_not eq 1
+      expect(clips[1].id).to_not eq 2
     end
   end
 end

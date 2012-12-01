@@ -1,5 +1,5 @@
 class ClipsController < ApplicationController
-  before_filter :prepare_clip, %w[show edit update]
+  before_filter :prepare_clip, only: %w[show edit update]
 
   def new
     @clip = Clip.new
@@ -9,7 +9,7 @@ class ClipsController < ApplicationController
     @clip = Clip.new(params['clip'])
 
     if @clip.save
-      redirect_to clip_path(id: @clip.access_id), notice: 'clip was successfuly created'
+      redirect_to clip_path(@clip), notice: 'clip was successfuly created'
     else
       render :new
     end
@@ -27,7 +27,7 @@ class ClipsController < ApplicationController
 
   def update
     if @clip.update_attributes(params['clip'])
-      redirect_to clip_path(id: @clip.access_id), notice: 'clip was successfuly updated'
+      redirect_to clip_path(@clip), notice: 'clip was successfuly updated'
     else
       render :edit
     end
@@ -35,6 +35,6 @@ class ClipsController < ApplicationController
 
   private
   def prepare_clip
-    @clip = Clip.where(access_id: params['id']).first
+    @clip = Clip.find(params['id'])
   end
 end
