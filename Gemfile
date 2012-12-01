@@ -48,6 +48,7 @@ gem 'coderay'
 gem 'acts_as_random_id', git: 'https://github.com/hashtrain/acts_as_random_id'
 
 gem 'omniauth-github'
+gem 'settingslogic'
 
 # for capybara
 gem 'nokogiri'
