@@ -16,4 +16,12 @@ test4
     expect(page).to have_css('.CodeRay')
     expect(page).to have_text(code)
   end
+
+  scenario 'User links to edit to click edit link' do
+    visit clip_path(id: clip.access_id)
+
+    click_on 'Edit'
+
+    expect(current_path).to eq(edit_clip_path(id: clip.access_id))
+  end
 end
