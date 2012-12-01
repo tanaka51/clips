@@ -1,0 +1,13 @@
+defaults: &defaults
+  github:
+    id: 2af18cc003ee66fd6447
+    secret: cba5e190132d2c06583e7e6da090307dc722e58c
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
