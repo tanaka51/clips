@@ -1,5 +1,5 @@
 class ClipsController < ApplicationController
-  before_filter :prepare_clip, %w[show edit update]
+  before_filter :prepare_clip, only: %w[show edit update]
 
   def new
     @clip = Clip.new
