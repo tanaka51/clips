@@ -23,45 +23,42 @@ describe ClipsController do
   end
 
   describe "POST 'create'" do
+    let!(:clip)   { FactoryGirl.create :clip, id: 1 }
+    let!(:params) do
+      { 'clip' => { 'code' => 'hogehoge' } }
+    end
+
+    let(:successed) { true }
+
+    before do
+      Clip.stub(:new) { (clip) }
+      clip.stub(:save).and_return(successed)
+
+      post 'create', params
+    end
+
     it "creates a new Clip" do
-      request_params = { 'clip' => { 'code' => 'hogehoge' } }
-
-      clip = stub_model(Clip)
-      Clip.should_receive(:new).with('code' => 'hogehoge').and_return(clip)
-      clip.should_receive(:save)
-
-      post 'create', request_params
+      expect(Clip).to have_received(:new).with('code' => 'hogehoge')
+      expect(clip).to have_received(:save)
     end
 
     context 'when successed to save' do
-      let!(:clip) { FactoryGirl.create :clip, id: 1 }
-
-      before do
-        Clip.stub(:new) { clip }
-      end
-
       it "redirects to 'show'" do
-        post 'create'
         expect(response).to redirect_to clip_path(clip)
       end
 
       it "sets a flash[:notice]" do
-        post 'create'
         expect(flash[:notice]).to_not be_nil
       end
     end
 
     context 'when failed to save' do
-      it "renders template 'new'" do
-        clip = stub_model(Clip)
-        Clip.stub(:new) { clip }
-        clip.stub(:save) { false }
+      let(:successed) { false }
 
-        post 'create'
+      it "renders template 'new'" do
         expect(page).to render_template('new')
       end
     end
-
   end
 
   describe "GET 'show'" do
