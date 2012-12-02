@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-def do_signin(user = nil)
+def prepare_auth(user = nil)
   user ||= FactoryGirl.create :user
 
   auth_param = {
@@ -13,7 +13,10 @@ def do_signin(user = nil)
 
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(auth_param)
+end
 
+def do_signin(user = nil)
+  prepare_auth(user)
   visit root_path
   click_on 'signin_button'
 end
