@@ -3,6 +3,10 @@ require 'spec_helper'
 
 feature 'Clip managemant' do
 
+  background do
+    do_signin
+  end
+
   scenario 'User creates a new clip' do
     visit root_path
 

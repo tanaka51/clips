@@ -2,6 +2,8 @@ require 'spec_helper'
 
 feature 'Clip table' do
   background do
+    do_signin
+
     FactoryGirl.create :clip, code: 'class Testing'
     FactoryGirl.create :clip, code: 'def say'
     FactoryGirl.create :clip, code: 'puts "hello, world!"'

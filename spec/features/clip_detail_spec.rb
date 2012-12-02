@@ -10,6 +10,10 @@ test4
   }
   given!(:clip) { FactoryGirl.create :clip, code: code }
 
+  background do
+    do_signin
+  end
+
   scenario 'User sees highliting code' do
     visit clip_path(clip)
 

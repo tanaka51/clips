@@ -2,6 +2,9 @@
 require 'spec_helper'
 
 feature "Header" do
+  background do
+    do_signin
+  end
 
   scenario "User sees header" do
     visit root_path
