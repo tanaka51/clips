@@ -3,6 +3,10 @@ require 'spec_helper'
 
 describe ClipsController do
 
+  before do
+    stub_signin
+  end
+
   describe "GET 'new'" do
     it "returns http success" do
       get 'new'
