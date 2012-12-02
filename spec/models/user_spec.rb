@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe User do
+  it { should have_many :clips }
+
   describe ".from_omniauth" do
     subject { described_class.from_omniauth(auth) }
 

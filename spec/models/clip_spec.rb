@@ -2,6 +2,8 @@ require 'spec_helper'
 require 'securerandom'
 
 describe Clip do
+  it { should belong_to :user }
+
   describe "validation" do
     it { should validate_presence_of :code }
   end
