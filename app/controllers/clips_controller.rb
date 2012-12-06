@@ -7,6 +7,7 @@ class ClipsController < ApplicationController
 
   def create
     @clip = Clip.new(params['clip'])
+    @clip.user = current_user
 
     if @clip.save
       redirect_to clip_path(@clip), notice: 'clip was successfuly created'

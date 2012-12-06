@@ -2,9 +2,10 @@
 require 'spec_helper'
 
 describe ClipsController do
+  let(:user) { FactoryGirl.create :user }
 
   before do
-    stub_signin
+    stub_signin(user)
   end
 
   describe "GET 'new'" do
@@ -31,14 +32,16 @@ describe ClipsController do
     let(:successed) { true }
 
     before do
-      Clip.stub(:new) { (clip) }
+      Clip.stub(:new)   { clip }
+      clip.stub(:user=) { user }
       clip.stub(:save).and_return(successed)
 
       post 'create', params
     end
 
-    it "creates a new Clip" do
+    it "creates a new Clip with current user" do
       expect(Clip).to have_received(:new).with('code' => 'hogehoge')
+      expect(clip).to have_received(:user=).with(user)
       expect(clip).to have_received(:save)
     end
 
