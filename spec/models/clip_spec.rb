@@ -6,6 +6,7 @@ describe Clip do
 
   describe "validation" do
     it { should validate_presence_of :code }
+    it { should validate_presence_of :user }
   end
 
   describe "before_create" do

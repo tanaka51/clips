@@ -3,5 +3,6 @@
 FactoryGirl.define do
   factory :clip do
     code "MyText"
+    user
   end
 end
