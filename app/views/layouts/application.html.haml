@@ -30,6 +30,10 @@
               %li= link_to 'sign out', signout_path
 
     .container
+      - if current_user
+        %select#groups
+          - current_user.groups.each do |group|
+            %option= group.name
 
       = bootstrap_flash
       = yield
