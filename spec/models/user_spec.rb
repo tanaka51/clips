@@ -37,9 +37,7 @@ describe User do
     end
 
     context "when user dosen't exist" do
-      before do
-        described_class.stub(:where).and_return([])
-      end
+      let!(:user) { nil }
 
       it 'creates a user' do
         described_class.should_receive(:create!)
