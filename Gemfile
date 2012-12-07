@@ -64,6 +64,7 @@ group :development, :test do
   gem 'database_cleaner'
 
   gem 'webmock'
+  gem 'httparty'
 
   gem 'guard'
   gem 'guard-spork'
