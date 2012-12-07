@@ -23,10 +23,7 @@ describe User do
     let(:user) { FactoryGirl.create :user, provider: provider, uid: uid, name: name}
 
     before do
-      described_class
-        .stub(:where)
-        .with('provider' => provider, 'uid' => uid)
-        .and_return([user])
+      described_class.stub(:where).and_return([user])
     end
 
     it 'finds user from auth' do
