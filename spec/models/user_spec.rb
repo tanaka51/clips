@@ -10,8 +10,7 @@ describe User do
     let!(:provider) { 'github' }
     let!(:uid)      { '12345678' }
     let!(:name)     { 'testuser' }
-
-    let(:auth) do
+    let!(:auth) do
       {
         'provider' => 'github',
         'uid' => uid,
@@ -20,7 +19,7 @@ describe User do
         }
       }
     end
-    let(:user) { FactoryGirl.create :user, provider: provider, uid: uid, name: name}
+    let!(:user) { FactoryGirl.create :user, provider: provider, uid: uid, name: name}
 
     before do
       described_class.stub(:where).and_return([user])
