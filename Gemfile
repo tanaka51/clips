@@ -63,11 +63,14 @@ group :development, :test do
   gem 'capybara', '>= 2.0'
   gem 'database_cleaner'
 
-  gem 'webmock'
   gem 'httparty'
 
   gem 'guard'
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'rb-inotify'
+end
+
+group :test do
+  gem 'webmock'
 end
