@@ -3,6 +3,7 @@ require 'securerandom'
 
 describe Clip do
   it { should belong_to :user }
+  it { should belong_to :group }
 
   describe "validation" do
     it { should validate_presence_of :code }
