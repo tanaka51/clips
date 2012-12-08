@@ -4,6 +4,32 @@ describe User do
   it { should have_many :clips }
   it { should have_and_belong_to_many :groups }
 
+  describe "after_save" do
+    let!(:user) { FactoryGirl.build :user, name: 'test-user' }
+    let!(:response_body) do <<EOF
+[
+  {
+    "login": "test-group",
+    "id": 1234567
+  }
+]
+EOF
+    end
+
+    before do
+      stub_request(:get, "https://api.github.com/users/#{user.name}/orgs").
+        to_return(
+           body: response_body,
+           status: 200,
+           headers: { 'Content-Length' => response_body.size })
+    end
+
+    it 'creates groups user belongs' do
+      user.save!
+      expect(user.groups.pluck(:name)).to eq ["test-group"]
+    end
+  end
+
   describe ".from_omniauth" do
     subject { described_class.from_omniauth(auth) }
 
