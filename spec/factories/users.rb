@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :user do
-    provider "MyString"
-    uid "MyString"
-    name "MyString"
+    provider "github"
+    sequence(:uid)  {|n| "#{n}"}
+    sequence(:name) {|n| "name_#{n}"}
 
     factory :user_with_groups do
       ignore do
