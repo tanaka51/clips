@@ -62,6 +62,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'capybara', '>= 2.0'
   gem 'database_cleaner'
+  gem 'launchy'
 
   gem 'httparty'
 
