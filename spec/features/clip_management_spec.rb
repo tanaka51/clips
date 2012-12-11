@@ -2,13 +2,17 @@
 require 'spec_helper'
 
 feature 'Clip managemant' do
+  given!(:group_name) { 'apple' }
+  given!(:user)       { FactoryGirl.create :user }
 
   background do
-    do_signin
+    user.groups << FactoryGirl.create(:group, name: group_name)
+
+    do_signin(user)
   end
 
   scenario 'User creates a new clip' do
-    visit root_path
+    visit root_path(group_name: group_name)
 
     fill_in 'clip_code', with: 'test test test test'
     click_button 'Create Clip'
@@ -18,13 +22,13 @@ feature 'Clip managemant' do
   end
 
   scenario 'User edits a clip' do
-    clip = FactoryGirl.create :clip, code: 'hogehoge'
-    visit edit_clip_path(clip)
+    clip = FactoryGirl.create :clip, code: 'hogehoge', user: user
+    visit edit_clip_path(group_name: group_name, id: clip.id)
 
     fill_in 'clip_code', with: 'test test test test'
     click_button 'Update Clip'
 
-    expect(current_path).to eq clip_path(clip)
+    expect(current_path).to eq clip_path(group_name: group_name, id: clip.id)
     expect(page).to have_text 'clip was successfuly updated'
     expect(page).to have_text 'test test test test'
   end

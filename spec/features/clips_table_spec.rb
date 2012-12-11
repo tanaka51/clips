@@ -1,15 +1,18 @@
 require 'spec_helper'
 
 feature 'Clip table' do
+  let!(:group_name) { 'apple' }
+
   background do
-    do_signin
+    user = FactoryGirl.create :user
+    user.groups << FactoryGirl.create(:group, name: group_name)
+    do_signin(user)
 
-    FactoryGirl.create :clip, code: 'class Testing'
-    FactoryGirl.create :clip, code: 'def say'
-    FactoryGirl.create :clip, code: 'puts "hello, world!"'
-    visit clips_path
+    FactoryGirl.create :clip, user: user, code: 'class Testing'
+    FactoryGirl.create :clip, user: user, code: 'def say'
+    FactoryGirl.create :clip, user: user, code: 'puts "hello, world!"'
+    visit clips_path(group_name: group_name)
   end
-
 
   scenario 'User watches clip table' do
     expect(page).to have_text('All Clips')
@@ -22,6 +25,6 @@ feature 'Clip table' do
     clip = Clip.first
     click_link clip.id
 
-    expect(current_path).to eq(clip_path(clip.id))
+    expect(current_path).to eq clip_path(group_name: group_name, id: clip.id)
   end
 end

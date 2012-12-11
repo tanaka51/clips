@@ -1,7 +1,9 @@
 Clips::Application.routes.draw do
   root to: 'clips#new'
 
-  resources :clips
+  scope ":group_name" do
+    resources :clips
+  end
 
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')

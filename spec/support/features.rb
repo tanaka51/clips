@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 def prepare_auth(user = nil)
-  user ||= FactoryGirl.create :user
+  user ||= FactoryGirl.create :user_with_groups
 
   auth_param = {
     provider: user.provider,
