@@ -14,7 +14,7 @@ feature 'Welcome' do
   scenario 'User signins with button then show clip table in group' do
     click_on 'signin_button'
 
-    expect(page.current_path).to eq '/apple/clips'
+    expect(page.current_path).to eq '/apple'
     expect(page).to have_text "apple"
     expect(page).to have_text "All Clips"
   end

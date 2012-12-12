@@ -12,7 +12,7 @@ feature 'Clip managemant' do
   end
 
   scenario 'User creates a new clip' do
-    visit root_path(group_name: group_name)
+    visit new_clip_path(group_name: group_name)
 
     fill_in 'clip_code', with: 'test test test test'
     click_button 'Create Clip'
