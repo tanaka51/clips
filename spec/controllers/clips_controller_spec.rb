@@ -108,7 +108,7 @@ describe ClipsController do
   end
 
   describe "GET 'index'" do
-    let!(:clips) { FactoryGirl.create_list :clip, 3, code: 'test', user: user }
+    let!(:clips) { FactoryGirl.create_list :clip, 3, user: user, group: group }
 
     before do
       get 'index', group_name: group_name

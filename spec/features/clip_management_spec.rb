@@ -11,13 +11,16 @@ feature 'Clip managemant' do
     do_signin(user)
   end
 
-  scenario 'User creates a new clip' do
+  scenario 'User creates a new clip in own group' do
     visit new_clip_path(group_name: group_name)
 
     fill_in 'clip_code', with: 'test test test test'
     click_button 'Create Clip'
 
     expect(page).to have_text 'clip was successfuly created'
+    expect(page).to have_text 'test test test test'
+
+    visit clips_path(group_name: group_name)
     expect(page).to have_text 'test test test test'
   end
 

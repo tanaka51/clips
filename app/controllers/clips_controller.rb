@@ -7,7 +7,8 @@ class ClipsController < ApplicationController
 
   def create
     @clip = Clip.new(params['clip'])
-    @clip.user = current_user
+    @clip.user  = current_user
+    @clip.group = Group.where(name: @group_name).first
 
     if @clip.save
       redirect_to clip_path(group_name: @group_name, id: @clip.id), notice: 'clip was successfuly created'
@@ -20,7 +21,7 @@ class ClipsController < ApplicationController
   end
 
   def index
-    @clips = Clip.all
+    @clips = Group.where(name: @group_name).first.clips
   end
 
   def edit
