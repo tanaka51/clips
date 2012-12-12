@@ -8,10 +8,10 @@ class ClipsController < ApplicationController
   def create
     @clip = Clip.new(params['clip'])
     @clip.user  = current_user
-    @clip.group = Group.where(name: @group_name).first
+    @clip.group = @group
 
     if @clip.save
-      redirect_to clip_path(group_name: @group_name, id: @clip.id), notice: 'clip was successfuly created'
+      redirect_to clip_path(group_name: @group.name, id: @clip.id), notice: 'clip was successfuly created'
     else
       render :new
     end
@@ -21,7 +21,7 @@ class ClipsController < ApplicationController
   end
 
   def index
-    @clips = Group.where(name: @group_name).first.clips
+    @clips = @group.clips
   end
 
   def edit
@@ -29,7 +29,7 @@ class ClipsController < ApplicationController
 
   def update
     if @clip.update_attributes(params['clip'])
-      redirect_to clip_path(group_name: @group_name, id: @clip.id), notice: 'clip was successfuly updated'
+      redirect_to clip_path(group_name: @group.name, id: @clip.id), notice: 'clip was successfuly updated'
     else
       render :edit
     end

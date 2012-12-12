@@ -15,11 +15,11 @@ class ApplicationController < ActionController::Base
   end
 
   def filter_group
-    @group_name = params['group_name']
+    @group = Group.where(name: params['group_name']).first
 
     # うまいことリファクタリングしたい
     if current_user
-      unless current_user.groups.exists?(name: @group_name)
+      unless current_user.groups.exists?(name: @group.name)
         render file: "#{Rails.root}/public/403", status: 403, layout: false
         return
       end

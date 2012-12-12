@@ -1,4 +1,4 @@
-= simple_form_for @clip, url: clips_path(group_name: @group_name) do |f|
+= simple_form_for @clip, url: clips_path(group_name: @group.name) do |f|
   = f.input :code, input_html: { class: 'span9' }
   .form-actions
     = f.button :submit, class: 'btn-primary'
